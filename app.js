@@ -1,0 +1,59 @@
+(function(){
+  document.documentElement.classList.add('js');
+
+  // Nav: solid on scroll + mobile toggle
+  var nav=document.getElementById('nav'), toggle=document.getElementById('navToggle'), links=document.getElementById('navLinks');
+  function onScroll(){ nav.classList.toggle('is-solid', window.scrollY>40); }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  toggle.addEventListener('click', function(){
+    var open=links.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open);
+    toggle.setAttribute('aria-label', open?'Close menu':'Open menu');
+  });
+  links.addEventListener('click', function(e){
+    if(e.target.tagName==='A'){ links.classList.remove('is-open'); toggle.setAttribute('aria-expanded','false'); }
+  });
+
+  // Publications
+  var pubs=[
+    ['2026','hsv','CCL25 chemokine promotes antiviral tissue resident CD4+ and CD8+ effector memory TRM cells associated with a reduction of ocular herpes infection and disease: a potential gut-eye axis in herpes immunity','Frontiers in Immunology'],
+    ['2026','hsv','NF-\u03baB/OCT-1 mediated upregulation of CXCL14 chemokine mobilizes mucosal effector memory CD4+ and CD8+ TEM cells, and NK cells associated with protection against genital herpes','Pathogens and Immunity'],
+    ['2026','cov','CXCL13/CXCR5 chemokine axis promotes antiviral CXCR5+CD19+ B cells and follicular/effector CXCR5+CD4+ T cells in the lungs associated with protection from severe and fatal COVID-19','Journal of Immunology'],
+    ['2026','hsv','Role of mucosal chemokines in the development of tissue-resident CD4+ and CD8+ TRM cells to fend off herpes simplex infections','Frontiers in Immunology'],
+    ['2025','ai','Artificial intelligence-, organoid-, and organ-on-chip-powered models to improve pre-clinical animal testing of vaccines and immunotherapeutics: potential, progress, and challenges','Frontiers in Artificial Intelligence'],
+    ['2025','cov','Insights into persistent SARS-CoV-2 reservoirs in chronic Long COVID','Viruses'],
+    ['2025','hsv','The path towards effective long-lasting tissue-targeted prime/pull/keep herpes simplex therapeutic vaccines','Vaccines'],
+    ['2025','ai','Artificial intelligence and machine learning in the development of vaccines and immunotherapeutics: yesterday, today, and tomorrow','Frontiers in Artificial Intelligence'],
+    ['2025','cov','A pan-beta-coronavirus vaccine bearing conserved and asymptomatic B- and T-cell epitopes protects against highly pathogenic Delta and highly transmissible Omicron SARS-CoV-2 variants','Human Vaccines and Immunotherapeutics'],
+    ['2025','hsv','Dysfunctional senescent herpes simplex virus-specific CD57+CD8+ T cells are associated with symptomatic recurrent ocular herpes in humans','Viruses'],
+    ['2025','hsv','A tissue-targeted prime/pull/keep therapeutic herpes simplex virus vaccine protects against recurrent ocular herpes infection and disease in HLA-A*0201 transgenic rabbits','Journal of Virology'],
+    ['2025','hsv','Therapeutic mucosal vaccination of herpes simplex virus type 2 infected guinea pigs with an adenovirus-based vaccine expressing the ribonucleotide reductase 2 and glycoprotein D induces local tissue-resident CD4+ and CD8+ TRM cells','Frontiers in Immunology'],
+    ['2025','cov','Dynamics of spike-specific neutralizing antibodies across five-year emerging SARS-CoV-2 variants of concern reveal conserved epitopes that protect against severe COVID-19','Frontiers in Immunology'],
+    ['2025','cov','A spike-based mRNA vaccine encapsulated in phospholipid DOPE-containing lipid nanoparticles induced potent B- and T-cell responses associated with protection against SARS-CoV-2 infection and COVID-19-like symptoms in hamsters','Vaccines'],
+    ['2024','cov','Antigen delivery platforms for next-generation coronavirus vaccines','Vaccines'],
+    ['2024','hsv','Therapeutic prime/pull vaccination of HSV-2-infected guinea pigs with the ribonucleotide reductase 2 (RR2) protein and CXCL11 chemokine boosts antiviral local tissue-resident and effector memory CD4+ and CD8+ T cells and protects against recurrent genital herpes','Journal of Virology']
+  ];
+  var labels={hsv:'Herpes',cov:'Coronavirus',ai:'AI and models'};
+  var list=document.getElementById('pubs');
+  list.innerHTML=pubs.map(function(p){
+    var q=encodeURIComponent(p[2].slice(0,120));
+    return '<li class="pub" data-t="'+p[1]+'"><span class="pub__yr">'+p[0]+'</span><div><a class="pub__t" target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/?term='+q+'">'+p[2]+'</a><span class="pub__j">'+p[3]+'</span></div><span class="pub__tag">'+labels[p[1]]+'</span></li>';
+  }).join('');
+  var btns=document.querySelectorAll('.filters button');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      btns.forEach(function(x){x.setAttribute('aria-pressed', x===b);});
+      var f=b.dataset.f;
+      list.querySelectorAll('.pub').forEach(function(li){ li.hidden = !(f==='all' || li.dataset.t===f); });
+    });
+  });
+
+  // Reveal on scroll
+  var els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+    },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  } else { els.forEach(function(el){ el.classList.add('in'); }); }
+})();
