@@ -37,6 +37,7 @@
       <a href="#pi">The PI</a>
       <a href="#publications">Publications</a>
       <a href="#news">News</a>
+      <a href="#join">Join</a>
       <a class="nav__btn" href="#contact">Contact</a>
     </nav>
   </div>
@@ -320,6 +321,73 @@
         <span class="tease__src">UC Irvine News</span>
         <span class="tease__go">Read article &rarr;</span>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN / TRAINEE INQUIRY -->
+<section class="block join" id="join">
+  <div class="container">
+    <div class="rule"><p class="eyebrow eyebrow--accent">Prospective trainees</p></div>
+    <div class="join__grid">
+      <div class="join__intro reveal">
+        <h2 class="cta__title">Train with the lab.</h2>
+        <p class="serif">Interested in T cell immunology, herpes and coronavirus vaccines, or AI-guided vaccine design? Tell us about yourself. Submitting opens a pre-filled email to Prof. BenMohamed in your mail app, so nothing is stored on this site.</p>
+        <ol class="join__steps">
+          <li><span>01</span>Complete the form with your background and interests.</li>
+          <li><span>02</span>Review the drafted email, attach your CV, and send.</li>
+          <li><span>03</span>The lab follows up on inquiries that match current openings.</li>
+        </ol>
+      </div>
+      <form class="form reveal" id="joinForm" novalidate>
+        <div class="form__row">
+          <div class="field"><label for="f-name">Full name <b aria-hidden="true">*</b></label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="f-email">Email <b aria-hidden="true">*</b></label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="form__row">
+          <div class="field"><label for="f-pos">Position of interest <b aria-hidden="true">*</b></label>
+            <select id="f-pos" name="position" required>
+              <option value="">Select one</option>
+              <option>Postdoctoral fellow</option>
+              <option>PhD student (rotation or thesis)</option>
+              <option>Master's student</option>
+              <option>Undergraduate researcher</option>
+              <option>Visiting scholar</option>
+              <option>Clinical or research fellow</option>
+            </select></div>
+          <div class="field"><label for="f-start">Earliest start</label><input id="f-start" name="start" type="text" placeholder="e.g. Fall 2027"></div>
+        </div>
+        <div class="form__row">
+          <div class="field"><label for="f-inst">Current institution</label><input id="f-inst" name="institution" type="text" autocomplete="organization"></div>
+          <div class="field"><label for="f-deg">Highest degree and field</label><input id="f-deg" name="degree" type="text" placeholder="e.g. PhD, Immunology"></div>
+        </div>
+        <fieldset class="field">
+          <legend>Research interests</legend>
+          <div class="checks">
+            <label><input type="checkbox" name="interest" value="Ocular herpes (HSV-1)"> Ocular herpes</label>
+            <label><input type="checkbox" name="interest" value="Genital herpes vaccine (HSV-2)"> Genital herpes vaccine</label>
+            <label><input type="checkbox" name="interest" value="Pan-coronavirus vaccine"> Pan-coronavirus vaccine</label>
+            <label><input type="checkbox" name="interest" value="Long COVID"> Long COVID</label>
+            <label><input type="checkbox" name="interest" value="Tissue-resident memory T cells"> Tissue-resident T cells</label>
+            <label><input type="checkbox" name="interest" value="AI and computational immunology"> AI and modeling</label>
+          </div>
+        </fieldset>
+        <div class="field"><label for="f-fund">Funding status</label>
+          <select id="f-fund" name="funding">
+            <option value="">Select one</option>
+            <option>I have or am applying for my own fellowship</option>
+            <option>Seeking a funded position</option>
+            <option>Not sure yet</option>
+          </select></div>
+        <div class="field"><label for="f-cv">Link to CV or profile</label><input id="f-cv" name="cv" type="url" placeholder="https://"></div>
+        <div class="field"><label for="f-msg">Research experience and goals <b aria-hidden="true">*</b></label><textarea id="f-msg" name="message" rows="5" required placeholder="Briefly describe your experience, techniques, and why this lab is a good fit."></textarea></div>
+        <p class="form__error" id="formError" role="alert" hidden></p>
+        <div class="form__actions">
+          <button class="btn" type="submit">Draft my email <span aria-hidden="true">&rarr;</span></button>
+          <button class="textlink textlink--sm form__copy" type="button" id="copyBtn">Copy message instead</button>
+        </div>
+        <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>

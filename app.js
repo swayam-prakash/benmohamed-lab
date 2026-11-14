@@ -48,6 +48,53 @@
     });
   });
 
+  // Trainee inquiry form: composes an email (no data stored)
+  var form=document.getElementById('joinForm');
+  if(form){
+    var err=document.getElementById('formError'), status=document.getElementById('formStatus');
+    function compose(){
+      var d=new FormData(form), g=function(k){return (d.get(k)||'').toString().trim();};
+      var ints=d.getAll('interest');
+      var lines=['Dear Prof. BenMohamed,','',
+        'I am writing to inquire about a '+g('position').toLowerCase()+' position in your laboratory.','',
+        'Name: '+g('name'),'Email: '+g('email')];
+      if(g('institution')) lines.push('Current institution: '+g('institution'));
+      if(g('degree')) lines.push('Highest degree: '+g('degree'));
+      if(g('start')) lines.push('Earliest start: '+g('start'));
+      if(ints.length) lines.push('Research interests: '+ints.join(', '));
+      if(g('funding')) lines.push('Funding status: '+g('funding'));
+      if(g('cv')) lines.push('CV or profile: '+g('cv'));
+      lines.push('','Research experience and goals:',g('message'),'','Thank you for your consideration.','',g('name'));
+      return {subject:'Prospective trainee inquiry: '+g('position')+' - '+g('name'), body:lines.join('\n')};
+    }
+    function validate(){
+      var bad=[];
+      form.querySelectorAll('[required]').forEach(function(el){
+        var ok=el.value.trim()!=='' && el.checkValidity();
+        el.setAttribute('aria-invalid', !ok);
+        if(!ok) bad.push(el);
+      });
+      var cv=form.querySelector('#f-cv');
+      if(cv.value && !cv.checkValidity()){ cv.setAttribute('aria-invalid',true); bad.push(cv);} else cv.removeAttribute('aria-invalid');
+      if(bad.length){ err.textContent='Please complete the required fields marked with an asterisk and check that the email and CV link are valid.'; err.hidden=false; bad[0].focus(); return false; }
+      err.hidden=true; return true;
+    }
+    form.addEventListener('input', function(e){ if(e.target.getAttribute('aria-invalid')==='true' && e.target.checkValidity() && e.target.value.trim()) e.target.setAttribute('aria-invalid',false); });
+    form.addEventListener('submit', function(e){
+      e.preventDefault(); if(!validate()) return;
+      var m=compose();
+      window.location.href='mailto:lbenmoha@uci.edu?subject='+encodeURIComponent(m.subject)+'&body='+encodeURIComponent(m.body);
+      status.textContent='Your mail app should open with a drafted message. Attach your CV before sending. If nothing opened, use "Copy message instead" and email lbenmoha@uci.edu.';
+    });
+    document.getElementById('copyBtn').addEventListener('click', function(){
+      if(!validate()) return;
+      var m=compose(), txt='To: lbenmoha@uci.edu\nSubject: '+m.subject+'\n\n'+m.body;
+      var done=function(){ status.textContent='Message copied. Paste it into an email to lbenmoha@uci.edu and attach your CV.'; };
+      if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(txt).then(done,function(){ status.textContent='Copy failed. Please email lbenmoha@uci.edu directly.'; }); }
+      else { var t=document.createElement('textarea'); t.value=txt; document.body.appendChild(t); t.select(); try{document.execCommand('copy'); done();}catch(x){} t.remove(); }
+    });
+  }
+
   // Reveal on scroll
   var els=document.querySelectorAll('.reveal');
   if('IntersectionObserver' in window){
