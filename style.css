@@ -57,9 +57,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .nav.is-solid{background:rgba(20,32,46,.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--border)}
 .nav__inner{display:flex;align-items:center;justify-content:space-between;height:84px;margin-inline:var(--side);transition:height .35s var(--ease)}
 .nav.is-solid .nav__inner{height:64px}
-.wordmark{display:flex;align-items:center;gap:.55rem;font-family:var(--serif);font-size:1.45rem;letter-spacing:-.01em;color:var(--white)}
-.wordmark svg{color:#d9b86c}
-.wordmark--sm{font-size:1.05rem}
+.wordmark{display:flex;align-items:center;font-family:var(--serif);font-size:clamp(1.6rem,1.25rem + 1vw,2.15rem);line-height:1;letter-spacing:-.015em;color:var(--white);white-space:nowrap;transition:font-size .35s var(--ease)}
+.nav.is-solid .wordmark{font-size:clamp(1.45rem,1.15rem + .8vw,1.8rem)}
+.wordmark--sm{font-size:1.3rem}
 .nav__links{display:flex;align-items:center;gap:1.75rem}
 .nav__links a{font-family:var(--grotesk);font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--white)}
 .nav__links a:hover{color:var(--accent-hover)}
