@@ -132,7 +132,7 @@
         return '<div class="biblio__yr"><h4>'+y+'<small>'+all+(all===1?' paper':' papers')+'</small></h4><ol>'+groups[y].map(function(p){
           return '<li class="bib"><a class="bib__t" href="https://pubmed.ncbi.nlm.nih.gov/'+p.p+'/" target="_blank" rel="noopener">'+esc(p.t)+'</a>'+
             '<p class="bib__a">'+authors(p.a)+'</p>'+
-            '<p class="bib__j">'+esc(p.j)+p.g.map(function(g){return '<span class="bib__rev'+(g==='Retracted'?' bib__rev--x':'')+'">'+g+'</span>';}).join('')+'<span class="bib__id">PMID '+p.p+'</span></p></li>';
+            '<p class="bib__j">'+esc(p.j)+p.g.map(function(g){return '<span class="bib__rev'+(/^Retract/.test(g)?' bib__rev--x':'')+'">'+g+'</span>';}).join('')+'<span class="bib__id">PMID '+p.p+'</span></p></li>';
         }).join('')+'</ol></div>';
       }).join(''):'<p class="biblio__empty">No publications match that search.</p>';
       count.textContent=words.length?(hits.length+' of '+data.length+' publications match'):(shown.length<hits.length?('Showing '+shown.length+' of '+data.length+' publications'):(data.length+' publications'));
