@@ -309,6 +309,35 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @media (max-width:640px){.members{grid-template-columns:1fr}.team__stats{grid-template-columns:1fr;gap:2rem;margin-top:3rem}}
 @media (max-width:480px){.ug{grid-template-columns:1fr}}
 
+/* COMPLETE PUBLICATION LIST */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.biblio{margin-top:clamp(3.5rem,6vw,5.5rem)}
+.biblio__head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem 2rem;margin-bottom:1rem}
+.biblio__head .team__sub{margin:0}
+.biblio__search{flex:0 1 380px;min-width:0}
+.biblio__search input{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);color:var(--white);font-family:var(--grotesk);font-size:14px;padding:.75rem 1rem;border-radius:2px}
+.biblio__search input::placeholder{color:var(--muted)}
+.biblio__search input:focus{outline:none;border-color:var(--accent)}
+.biblio__count{font-family:var(--grotesk);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.biblio__yr{display:grid;grid-template-columns:110px minmax(0,1fr);gap:0 2rem;border-top:1px solid var(--border);padding-top:1.25rem;margin-top:1.25rem}
+.biblio__yr h4{font-family:var(--grotesk);font-size:clamp(1.5rem,1.2rem + .8vw,2rem);font-weight:600;color:var(--white);line-height:1;letter-spacing:-.01em}
+.biblio__yr h4 small{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:.5rem}
+.biblio__yr ol{list-style:none;margin:0;padding:0}
+.bib{padding:0 0 1.1rem;margin-bottom:1.1rem;border-bottom:1px solid rgba(44,62,87,.55)}
+.bib:last-child{border-bottom:0;margin-bottom:0}
+.bib__t{font-family:var(--grotesk);font-size:15.5px;font-weight:500;line-height:1.45;color:var(--white)}
+.bib__t:hover{color:var(--accent-hover)}
+.bib__a{font-family:var(--grotesk);font-size:13px;line-height:1.5;color:var(--muted);margin-top:.3rem}
+.bib__a b{color:var(--text);font-weight:600}
+.bib__j{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--text);margin-top:.2rem;overflow-wrap:anywhere}
+.bib__j .bib__id{font-family:var(--grotesk);font-style:normal;font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--accent);margin-left:.6rem;white-space:nowrap}
+.bib__rev{display:inline-block;font-family:var(--grotesk);font-style:normal;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-soft);border:1px solid rgba(79,158,217,.4);padding:.1rem .45rem;margin-left:.6rem;vertical-align:1px}
+.bib__rev--x{color:#f2b8a0;border-color:rgba(242,184,160,.45)}
+.biblio__more{margin-top:1.75rem;font-family:var(--grotesk);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:transparent;border:1px solid var(--border);padding:.85rem 1.4rem;cursor:pointer;transition:border-color .2s,background .2s}
+.biblio__more:hover{border-color:var(--accent);background:rgba(79,158,217,.1)}
+.biblio__empty{font-family:var(--grotesk);color:var(--muted);padding:1.5rem 0;border-top:1px solid var(--border)}
+@media (max-width:700px){.biblio__yr{grid-template-columns:1fr;gap:.9rem}.biblio__search{flex-basis:100%}}
+
 /* FOOTER */
 .footer{background:var(--ink-2);border-top:2px solid var(--accent)}
 .footer__inner{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem 2rem;padding-block:2rem;font-family:var(--grotesk);font-size:12px;color:var(--muted)}

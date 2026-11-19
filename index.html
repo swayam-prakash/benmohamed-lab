@@ -310,6 +310,16 @@
     </div>
     <ul class="pubs" id="pubs"></ul>
     <p class="source">Selected from the most recent records listed on <a href="https://profiles.icts.uci.edu/lbachir.benmohamed">UCI Profiles</a>. Titles link to PubMed searches.</p>
+    <div class="biblio" id="biblio">
+      <div class="biblio__head">
+        <h3 class="team__sub">Complete publication list</h3>
+        <label class="biblio__search"><span class="sr-only">Search publications</span><input type="search" id="biblioQ" placeholder="Search title, author, journal or year" autocomplete="off"></label>
+      </div>
+      <p class="biblio__count" id="biblioCount" aria-live="polite"></p>
+      <div id="biblioList"></div>
+      <button type="button" class="biblio__more" id="biblioMore">Show all publications</button>
+      <p class="source">Compiled from PubMed records indexed under BenMohamed L (retrieved November 2026), most recent first. Preprints, reviews and editorials are labeled, and two articles that were later retracted are marked as retracted. Each title links to its PubMed record. For the authoritative and continuously updated list, see <a href="https://pubmed.ncbi.nlm.nih.gov/?term=BenMohamed+L%5BAuthor%5D&amp;sort=date" target="_blank" rel="noopener">PubMed</a>.</p>
+    </div>
   </div>
 </section>
 
@@ -455,6 +465,7 @@
   </div>
 </footer>
 
+<script src="pubs-data.js" defer></script>
 <script src="app.js" defer></script>
 </body>
 </html>

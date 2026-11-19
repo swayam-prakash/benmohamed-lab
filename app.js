@@ -107,6 +107,42 @@
     });
   });
 
+  // Complete publication list (data: pubs-data.js, from PubMed)
+  (function(){
+    var data=window.LAB_PUBS, wrap=document.getElementById('biblioList');
+    if(!data||!wrap) return;
+    var q=document.getElementById('biblioQ'), more=document.getElementById('biblioMore'), count=document.getElementById('biblioCount');
+    var LIMIT=25, expanded=false;
+    function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+    function authors(a){
+      var i=a.indexOf('BenMohamed L'), out;
+      if(a.length<=6) out=a.map(esc);
+      else { out=a.slice(0,3).map(esc); if(i>=3&&i<a.length-1){out.push('...');out.push(esc(a[i]));} out.push('...'); out.push(esc(a[a.length-1])); }
+      return out.join(', ').replace('BenMohamed L','<b>BenMohamed L</b>').replace(/, \.\.\., /g,', ..., ');
+    }
+    data.forEach(function(p){ p._s=(p.t+' '+p.a.join(' ')+' '+p.j+' '+p.y+' '+p.g.join(' ')).toLowerCase(); });
+    function render(){
+      var term=(q.value||'').trim().toLowerCase(), words=term.split(/\s+/).filter(Boolean);
+      var hits=data.filter(function(p){return words.every(function(w){return p._s.indexOf(w)>-1;});});
+      var shown=(expanded||words.length)?hits:hits.slice(0,LIMIT);
+      var groups={}, order=[];
+      shown.forEach(function(p){ if(!groups[p.y]){groups[p.y]=[];order.push(p.y);} groups[p.y].push(p); });
+      wrap.innerHTML=order.length?order.map(function(y){
+        var all=hits.filter(function(p){return p.y===y;}).length;
+        return '<div class="biblio__yr"><h4>'+y+'<small>'+all+(all===1?' paper':' papers')+'</small></h4><ol>'+groups[y].map(function(p){
+          return '<li class="bib"><a class="bib__t" href="https://pubmed.ncbi.nlm.nih.gov/'+p.p+'/" target="_blank" rel="noopener">'+esc(p.t)+'</a>'+
+            '<p class="bib__a">'+authors(p.a)+'</p>'+
+            '<p class="bib__j">'+esc(p.j)+p.g.map(function(g){return '<span class="bib__rev'+(g==='Retracted'?' bib__rev--x':'')+'">'+g+'</span>';}).join('')+'<span class="bib__id">PMID '+p.p+'</span></p></li>';
+        }).join('')+'</ol></div>';
+      }).join(''):'<p class="biblio__empty">No publications match that search.</p>';
+      count.textContent=words.length?(hits.length+' of '+data.length+' publications match'):(shown.length<hits.length?('Showing '+shown.length+' of '+data.length+' publications'):(data.length+' publications'));
+      more.hidden=!!words.length||expanded||hits.length<=LIMIT;
+    }
+    q.addEventListener('input',render);
+    more.addEventListener('click',function(){expanded=true;render();});
+    render();
+  })();
+
   // Reveal on scroll
   var els=document.querySelectorAll('.reveal');
   if('IntersectionObserver' in window){
