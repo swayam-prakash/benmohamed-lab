@@ -39,7 +39,7 @@
     var q=encodeURIComponent(p[2].slice(0,120));
     return '<li class="pub" data-t="'+p[1]+'"><span class="pub__yr">'+p[0]+'</span><div><a class="pub__t" target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/?term='+q+'">'+p[2]+'</a><span class="pub__j">'+p[3]+'</span></div><span class="pub__tag">'+labels[p[1]]+'</span></li>';
   }).join('');
-  var btns=document.querySelectorAll('.filters button');
+  var btns=document.querySelectorAll('#publications .filters button');
   btns.forEach(function(b){
     b.addEventListener('click', function(){
       btns.forEach(function(x){x.setAttribute('aria-pressed', x===b);});
@@ -94,6 +94,18 @@
       else { var t=document.createElement('textarea'); t.value=txt; document.body.appendChild(t); t.select(); try{document.execCommand('copy'); done();}catch(x){} t.remove(); }
     });
   }
+
+  // Lab member tabs
+  var tabs=document.querySelectorAll('#team [role=tab]');
+  function selectTab(t){
+    tabs.forEach(function(x){ var on=x===t; x.setAttribute('aria-selected',on); x.setAttribute('aria-pressed',on); x.tabIndex=on?0:-1; document.getElementById(x.getAttribute('aria-controls')).hidden=!on; });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){ selectTab(t); });
+    t.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'||e.key==='ArrowLeft'){ e.preventDefault(); var n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length]; selectTab(n); n.focus(); }
+    });
+  });
 
   // Reveal on scroll
   var els=document.querySelectorAll('.reveal');
