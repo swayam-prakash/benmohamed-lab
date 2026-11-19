@@ -16,6 +16,11 @@
 
   // Publications
   var pubs=[
+    ['2026','hsv','A tissue-targeted vaccine protects against recurrent ocular herpes infection and disease, and alleviates the associated cognitive, behavioral, and social deficits in a \'humanized\' HLA transgenic mouse model of UVB-induced reactivation','Research Square (preprint)'],
+    ['2026','cov','Multi-antigen coronavirus vaccine induces potent and durable cross-protection against multiple SARS-CoV-2 variants','npj Vaccines'],
+    ['2026','cov','High frequencies of senescent and exhausted natural killer cells and SARS-CoV-2-specific memory CD8+ T cells distinguish critically ill from asymptomatic unvaccinated COVID-19 patients','Viruses'],
+    ['2026','hsv','Tissue-resident and effector-memory lymphocyte recruitment to the ocular mucosa requires CCL28/CCR10 signaling during recurrent HSV-1 infection','bioRxiv (preprint)'],
+    ['2026','cov','From bench to bedside: reframing the CXCL13/CXCR5 axis as a non-redundant organizer of protective pulmonary immunity in COVID-19','Journal of Clinical and Cellular Immunology'],
     ['2026','hsv','CCL25 chemokine promotes antiviral tissue resident CD4+ and CD8+ effector memory TRM cells associated with a reduction of ocular herpes infection and disease: a potential gut-eye axis in herpes immunity','Frontiers in Immunology'],
     ['2026','hsv','NF-\u03baB/OCT-1 mediated upregulation of CXCL14 chemokine mobilizes mucosal effector memory CD4+ and CD8+ TEM cells, and NK cells associated with protection against genital herpes','Pathogens and Immunity'],
     ['2026','cov','CXCL13/CXCR5 chemokine axis promotes antiviral CXCR5+CD19+ B cells and follicular/effector CXCR5+CD4+ T cells in the lungs associated with protection from severe and fatal COVID-19','Journal of Immunology'],
