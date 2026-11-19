@@ -297,6 +297,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .member__role{font-family:var(--grotesk);font-size:var(--text-sm);color:var(--text);margin-top:.3rem;line-height:1.45}
 .member__yrs{font-family:var(--grotesk);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-top:.5rem}
 .members--current .member{padding:1.6rem 0}
+.members--current .member{grid-template-columns:84px 1fr;align-items:center}
+.members--current .member__av{width:84px;height:84px;font-size:20px}
+.member__av--photo{object-fit:cover;background:var(--ink-2)}
+
 .team__alumni{margin-top:5rem}
 .team__bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.25rem 2rem;margin-bottom:1.5rem}
 .team__note{font-family:var(--grotesk);font-size:var(--text-sm);color:var(--muted);margin-bottom:1.25rem}
