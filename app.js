@@ -157,21 +157,3 @@
     els.forEach(function(el){ io.observe(el); });
   } else { els.forEach(function(el){ el.classList.add('in'); }); }
 })();
-
-/* Light/dark background toggle (remembers choice) */
-(function(){
-  var btn=document.getElementById('themeBtn'); if(!btn) return;
-  var root=document.documentElement;
-  function sync(){
-    var light=root.getAttribute('data-theme')==='light';
-    btn.setAttribute('aria-pressed',String(light));
-    btn.setAttribute('aria-label',light?'Switch to dark background':'Switch to light background');
-  }
-  btn.addEventListener('click',function(){
-    var light=root.getAttribute('data-theme')!=='light';
-    if(light) root.setAttribute('data-theme','light'); else root.removeAttribute('data-theme');
-    try{localStorage.setItem('theme',light?'light':'dark')}catch(e){}
-    sync();
-  });
-  sync();
-})();
