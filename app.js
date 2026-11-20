@@ -68,7 +68,9 @@
       if(g('start')) lines.push('Earliest start: '+g('start'));
       if(ints.length) lines.push('Research interests: '+ints.join(', '));
       if(g('funding')) lines.push('Funding status: '+g('funding'));
-      if(g('cv')) lines.push('CV or profile: '+g('cv'));
+      if(g('cv')) lines.push('LinkedIn / GitHub / webpage: '+g('cv'));
+      var cvf=form.querySelector('#f-cvfile');
+      if(cvf && cvf.files && cvf.files[0]) lines.push('Attached CV: '+cvf.files[0].name);
       lines.push('','Research experience and goals:',g('message'),'','Thank you for your consideration.','',g('name'));
       return {subject:'Prospective trainee inquiry: '+g('position')+' - '+g('name'), body:lines.join('\n')};
     }
@@ -81,6 +83,8 @@
       });
       var cv=form.querySelector('#f-cv');
       if(cv.value && !cv.checkValidity()){ cv.setAttribute('aria-invalid',true); bad.push(cv);} else cv.removeAttribute('aria-invalid');
+      var cvf=form.querySelector('#f-cvfile');
+      if(cvf && cvf.files && cvf.files[0] && !/\.(pdf|docx?)$/i.test(cvf.files[0].name)){ cvf.setAttribute('aria-invalid',true); bad.push(cvf);} else if(cvf) cvf.removeAttribute('aria-invalid');
       if(bad.length){ err.textContent='Please complete the required fields marked with an asterisk and check that the email and CV link are valid.'; err.hidden=false; bad[0].focus(); return false; }
       err.hidden=true; return true;
     }
@@ -89,7 +93,14 @@
       e.preventDefault(); if(!validate()) return;
       var m=compose();
       window.location.href='mailto:lbenmoha@uci.edu?subject='+encodeURIComponent(m.subject)+'&body='+encodeURIComponent(m.body);
-      status.textContent='Your mail app should open with a drafted message. Attach your CV before sending. If nothing opened, use "Copy message instead" and email lbenmoha@uci.edu.';
+      status.textContent='Your mail app should open with the drafted message. Attach your CV file before sending. If nothing opened, use "Copy message instead" and email lbenmoha@uci.edu.';
+    });
+    var cvIn=form.querySelector('#f-cvfile'), cvHint=document.getElementById('cvHint');
+    if(cvIn) cvIn.addEventListener('change', function(){
+      if(cvIn.files && cvIn.files[0]){
+        var f=cvIn.files[0], kb=Math.max(1,Math.round(f.size/1024));
+        cvHint.textContent='Selected: '+f.name+' ('+kb+' KB). Attach this file to the email in your mail app before sending.';
+      } else cvHint.textContent='Pick your CV here. Your mail app opens with the drafted message; attach this file before sending and it reaches Prof. BenMohamed with your email.';
     });
     document.getElementById('copyBtn').addEventListener('click', function(){
       if(!validate()) return;
